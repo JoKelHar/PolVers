@@ -57,4 +57,4 @@ The strategic decisions, trade-offs, diligence, and direction here are mine; the
 
 ## Contact
 
-João H · [joao.harrison@gmail.com](mailto:joao.harrison@gmail.com) · [LinkedIn](https://www.linkedin.com/in/jo%C3%A3o-harrison-411029149/)
+João H · [LinkedIn](https://www.linkedin.com/in/jo%C3%A3o-harrison-411029149/)
