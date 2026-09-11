@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PolVers — a product discovery case study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --marble:#ECE8E0; --card:#F5F2EB; --ink:#20182A; --muted:#655E6B;
+    --gold:#A9772C; --gold-deep:#7E561C; --gold-bright:#DBAE54; --plum:#281B3C; --line:#D6CFC1;
+    --display:'Space Grotesk',sans-serif; --body:'IBM Plex Sans',sans-serif; --mono:'IBM Plex Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--marble);color:var(--ink);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:9vh 6vw 6vh}
+  .wrap{max-width:640px;width:100%}
+  .brand{display:flex;align-items:center;gap:10px;margin-bottom:28px}
+  .logo{font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:-.01em}
+  .logo b{color:var(--gold-deep)}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:16px}
+  h1{font-family:var(--display);font-weight:500;font-size:clamp(30px,4.4vw,44px);line-height:1.1;letter-spacing:-.02em}
+  h1 em{font-style:normal;color:var(--gold-deep)}
+  p.lead{font-size:16px;color:var(--muted);max-width:34em;margin-top:16px}
+  .status{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.03em;margin-top:14px}
+  .demos{margin-top:46px;display:flex;flex-direction:column;gap:2px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .demo{display:flex;justify-content:space-between;align-items:center;gap:16px;background:var(--card);padding:20px 22px;text-decoration:none;color:var(--ink);transition:background .15s}
+  .demo:hover{background:var(--marble)}
+  .demo .t{font-family:var(--display);font-weight:500;font-size:17px}
+  .demo .d{font-size:13px;color:var(--muted);margin-top:3px}
+  .demo .arrow{font-family:var(--mono);font-size:16px;color:var(--gold-deep);flex:none}
+  .foot{margin-top:44px;padding-top:28px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+  .foot a{color:var(--gold-deep);text-underline-offset:2px}
+  .foot .fnote{font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">
+    <svg width="28" height="28" viewBox="0 0 40 40" aria-hidden="true">
+      <circle cx="20" cy="20" r="18.5" fill="#A9772C"/>
+      <g transform="translate(8 7.5)" fill="#ECE8E0">
+        <path d="M6.4 24 V12.4 L11 3.6 a1.7 1.7 0 0 1 3.2 .8 V9.2 h5.1 a2.2 2.2 0 0 1 2.17 2.63 l-1.3 6.6 A2.2 2.2 0 0 1 18 20.2 H6.4 Z"/>
+        <rect x="1.6" y="12.4" width="4.4" height="11.6" rx="1"/>
+      </g>
+    </svg>
+    <span class="logo">Pol<b>Vers</b></span>
+  </div>
+
+  <span class="eyebrow">A product discovery case study</span>
+  <h1>You've got the idea.<br><em>Here's the proof of the process.</em></h1>
+  <p class="lead">During a break between roles, I took a single throwaway idea and ran it through the full early-stage product process — problem framing, naming &amp; trademark diligence, monetisation design, GDPR-aware data modelling, and a complete brand &amp; motion system.</p>
+  <p class="status">Concept, brand, and validation assets complete · demand-validation in progress</p>
+
+  <div class="demos">
+    <a class="demo" href="waitlist.html"><span><span class="t">Waitlist</span><br><span class="d">The live demand-validation landing page</span></span><span class="arrow">→</span></a>
+    <a class="demo" href="pitch-deck.html"><span><span class="t">Pitch deck</span><br><span class="d">Interactive brand &amp; concept deck</span></span><span class="arrow">→</span></a>
+    <a class="demo" href="sensory-system.html"><span><span class="t">Sensory system</span><br><span class="d">The motion system — how it should feel</span></span><span class="arrow">→</span></a>
+    <a class="demo" href="slot-line.html"><span><span class="t">Marketing line</span><br><span class="d">Animated headline experiment</span></span><span class="arrow">→</span></a>
+  </div>
+
+  <div class="foot">
+    <a href="https://github.com/JoKelHar/PolVers">Full case study &amp; write-up on GitHub →</a>
+    <span class="fnote">João H · <a href="mailto:joao.harrison@gmail.com">joao.harrison@gmail.com</a></span>
+  </div>
+</div>
+</body>
+</html>
