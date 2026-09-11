@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PolVers — pitch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@700&family=UnifrakturCook:wght@700&family=Fredoka:wght@600&family=Playfair+Display:ital,wght@1,700&family=Stardos+Stencil:wght@700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --marble:#ECE8E0; --card:#F5F2EB; --inset:#E1DDD3;
+    --ink:#20182A; --muted:#655E6B;
+    --gold:#A9772C; --gold-deep:#7E561C; --gold-bright:#DBAE54;
+    --plum:#281B3C; --plum-2:#33244C; --line:#D6CFC1;
+    --display:'Space Grotesk',sans-serif; --body:'IBM Plex Sans',sans-serif; --mono:'IBM Plex Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-snap-type:y mandatory;scroll-behavior:smooth}
+  body{background:var(--marble);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased}
+  .slide{min-height:100vh;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;padding:6vh 7vw;position:relative;border-bottom:1px solid var(--line)}
+  .slide.dark{background:var(--plum);color:var(--marble);border-bottom:none}
+  .slide.dark2{background:var(--plum-2);color:var(--marble);border-bottom:none}
+  .kicker{font-family:var(--mono);font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:22px}
+  .dark .kicker,.dark2 .kicker{color:var(--gold-bright)}
+  h1{font-family:var(--display);font-weight:500;font-size:clamp(34px,6vw,66px);line-height:1.02;letter-spacing:-.025em}
+  h2{font-family:var(--display);font-weight:500;font-size:clamp(27px,4vw,44px);line-height:1.07;letter-spacing:-.02em}
+  .lead{font-size:clamp(17px,1.9vw,21px);line-height:1.6;color:var(--muted);max-width:34em;margin-top:22px}
+  .dark .lead,.dark2 .lead{color:#CFC6DA}
+  .accent{color:var(--gold-deep)} .dark .accent,.dark2 .accent{color:var(--gold-bright)}
+  .pagenum{position:absolute;top:5vh;right:7vw;font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.1em}
+  .dark .pagenum,.dark2 .pagenum{color:#8A7C9A}
+  .brandmark{display:flex;align-items:center;gap:14px;margin-bottom:34px}
+  .logo{font-family:var(--display);font-weight:700;font-size:26px;letter-spacing:-.01em}
+  .logo b{color:var(--gold-bright)}
+  .thumb-spin{animation:flipthumb 3.4s ease-in-out infinite;transform-origin:50% 50%}
+  @keyframes flipthumb{0%,32%{transform:rotate(-8deg)}50%,82%{transform:rotate(188deg)}100%{transform:rotate(-8deg)}}
+
+  .angles{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:14px}
+  .angle{border-top:2px solid var(--gold-bright);padding-top:16px}
+  .angle .n{font-family:var(--mono);font-size:12px;color:var(--gold-bright);letter-spacing:.12em}
+  .angle h3{font-family:var(--display);font-weight:500;font-size:clamp(18px,1.9vw,23px);margin:12px 0 8px;line-height:1.15}
+  .angle p{font-size:15px;color:#CFC6DA;line-height:1.5}
+
+  .stat{font-family:var(--display);font-weight:700;font-size:clamp(52px,9vw,108px);color:var(--gold);line-height:.9}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden;margin-top:34px}
+  .step{background:var(--card);padding:28px 24px;color:var(--ink)}
+  .step .num{font-family:var(--mono);font-size:13px;color:var(--gold-deep);letter-spacing:.1em}
+  .step h3{font-family:var(--display);font-weight:500;font-size:20px;margin:14px 0 8px}
+  .step p{font-size:14px;color:var(--muted);line-height:1.5}
+
+  .cres{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:32px}
+  .cpanel{border:1px solid rgba(219,174,84,.32);border-radius:12px;padding:30px;display:flex;flex-direction:column;gap:14px;min-height:300px}
+  .cpanel .cl{font-family:var(--mono);font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-bright)}
+  .cpanel .cbig{font-family:var(--display);font-weight:500;font-size:clamp(24px,2.7vw,34px);letter-spacing:-.01em;color:var(--marble)}
+  .cpanel .csub{font-size:15px;color:#CFC6DA;line-height:1.55}
+  .cpanel .cq{font-family:var(--display);font-style:italic;color:var(--gold-bright);font-size:18px;margin-top:auto}
+  .interplay{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+  .chip{font-family:var(--mono);font-size:12px;color:#CFC6DA;border:1px solid rgba(219,174,84,.3);border-radius:24px;padding:9px 16px;letter-spacing:.04em}
+  .chip b{color:var(--gold-bright);font-weight:500}
+
+  .doors{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:34px}
+  .door{border:1px solid var(--line);border-radius:8px;padding:30px;color:var(--ink)}
+  .door.b{background:var(--card)}
+  .door .tag{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep)}
+  .door h3{font-family:var(--display);font-weight:500;font-size:clamp(22px,2.4vw,28px);margin:14px 0 10px;letter-spacing:-.01em}
+  .door p{font-size:15px;color:var(--muted);line-height:1.55}
+  .door .q{font-family:var(--display);font-size:17px;color:var(--ink);margin-top:16px;font-weight:500}
+
+  .model{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px}
+  .tier{flex:1;min-width:180px;border:1px solid var(--line);border-radius:8px;padding:22px;background:var(--card);color:var(--ink)}
+  .tier .t{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:8px}
+  .tier .h{font-family:var(--display);font-weight:500;font-size:18px;margin-bottom:6px;color:var(--ink)}
+  .tier p{font-size:13px;color:var(--muted);line-height:1.5}
+  .tier.rev{border-color:var(--gold);border-width:1.5px}
+
+  .igrow{display:flex;gap:26px;flex-wrap:wrap;margin-top:30px;justify-content:center}
+  .ig{width:270px;height:337px;border-radius:14px;overflow:hidden;position:relative;display:flex;flex-direction:column;flex:none}
+  .ig .lab{position:absolute;bottom:-24px;left:0;right:0;text-align:center;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.06em}
+  .ig-dark{background:var(--plum);color:var(--marble);padding:26px 24px;justify-content:space-between}
+  .ig-marble{background:var(--marble);color:var(--ink);padding:26px 24px;justify-content:space-between;border:1px solid var(--line)}
+  .ig-card{background:var(--card);color:var(--ink);padding:22px;justify-content:space-between;border:1px solid var(--line)}
+  .ig small{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+  .ig h4{font-family:var(--display);font-weight:500;font-size:26px;line-height:1.08;letter-spacing:-.01em}
+  .ig .foot{display:flex;align-items:center;gap:8px;font-family:var(--display);font-weight:500;font-size:15px}
+
+  .laurelnum{position:relative;flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .laurelnum .lw{position:absolute;inset:0}
+  .laurelnum .tp{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--muted);margin-bottom:-2px}
+  .laurelnum .pc{font-family:var(--display);font-weight:700;color:var(--gold);line-height:1}
+
+  .phonewrap{display:flex;gap:40px;align-items:center;flex-wrap:wrap;margin-top:20px}
+  .phone{width:322px;flex:none;background:#17121F;border-radius:42px;padding:12px;box-shadow:0 2px 0 var(--line)}
+  .screen{background:var(--marble);border-radius:32px;overflow:hidden;display:flex;flex-direction:column;height:624px}
+  .appbar{display:flex;justify-content:space-between;align-items:center;padding:16px 18px 12px}
+  .appbar .lg{font-family:var(--display);font-weight:700;font-size:17px;color:var(--ink)}
+  .appbar .lg b{color:var(--gold-deep)}
+  .entries{font-family:var(--mono);font-size:12px;color:var(--gold-deep);display:flex;align-items:center;gap:6px}
+  .icard{margin:4px 14px 0;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;flex:1;display:flex;flex-direction:column;overflow:hidden}
+  .poster{display:flex;align-items:center;gap:10px}
+  .av{width:38px;height:38px;border-radius:50%;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;font-size:13px;flex:none}
+  .poster .who{font-family:var(--body);font-size:14px;font-weight:500;color:var(--ink);line-height:1.2}
+  .poster .meta{font-family:var(--mono);font-size:11px;color:var(--muted)}
+  .itags{display:flex;gap:8px;margin:14px 0 6px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .ititle{font-family:var(--display);font-weight:700;font-size:25px;color:var(--ink);letter-spacing:-.01em}
+  .idesc{font-size:14px;color:var(--muted);line-height:1.5;margin-top:6px}
+  .verdictrow{display:flex;align-items:center;gap:12px;margin:12px 0;padding-top:12px;border-top:1px solid var(--line)}
+  .vl{font-family:var(--mono);font-size:11px;color:var(--gold-deep);letter-spacing:.05em;line-height:1.5}
+  .vl b{font-family:var(--display);color:var(--ink);font-size:14px;display:block;font-weight:500}
+  .roar{display:flex;align-items:center;gap:12px;margin:0 0 12px;padding:9px 12px;background:rgba(169,119,44,.09);border-radius:10px}
+  .roar .rn{font-family:var(--display);font-weight:700;font-size:21px;color:var(--gold-deep);line-height:1}
+  .roar .rt{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+  .roar .rt span{text-transform:none;letter-spacing:0;font-size:11px}
+  .isig{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink);margin-bottom:7px}
+  .isig .bar{flex:1;height:5px;background:var(--inset);border-radius:20px;overflow:hidden}
+  .isig .fl{height:100%;background:var(--gold)}
+  .isig .tag{font-family:var(--mono);font-size:9px;padding:2px 6px;border-radius:20px;background:rgba(169,119,44,.16);color:var(--gold-deep);white-space:nowrap}
+  .prov{font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:auto;padding-top:10px}
+  .actions{display:flex;align-items:center;justify-content:center;gap:14px;padding:14px}
+  .abtn{width:50px;height:50px;border-radius:50%;border:1px solid var(--line);background:var(--marble);display:flex;align-items:center;justify-content:center}
+  .abtn.big{width:58px;height:58px;border-color:var(--gold);background:rgba(169,119,44,.1)}
+  .caption{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.06em;margin-top:14px}
+
+  .scrollcue{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;z-index:5;background:rgba(236,232,224,.85);padding:6px 12px;border-radius:20px;transition:opacity .3s}
+  @media (max-width:760px){ .angles,.steps,.doors,.cres{grid-template-columns:1fr} .slide{padding:8vh 8vw} }
+  @media (prefers-reduced-motion:reduce){ .thumb-spin{animation:none} }
+</style>
+</head>
+<body>
+
+<div class="scrollcue">scroll &#8595;</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <g id="thumb"><g transform="translate(8 7.5)">
+    <path d="M6.4 24 V12.4 L11 3.6 a1.7 1.7 0 0 1 3.2 .8 V9.2 h5.1 a2.2 2.2 0 0 1 2.17 2.63 l-1.3 6.6 A2.2 2.2 0 0 1 18 20.2 H6.4 Z"/>
+    <rect x="1.6" y="12.4" width="4.4" height="11.6" rx="1"/>
+  </g></g>
+  <g id="lb" fill="currentColor">
+    <ellipse cx="51.2" cy="92.8" rx="8.6" ry="3.3" transform="rotate(180 51.2 92.8)"/>
+    <ellipse cx="41.0" cy="88.2" rx="8.4" ry="3.2" transform="rotate(199 41.0 88.2)"/>
+    <ellipse cx="32.8" cy="80.5" rx="8.3" ry="3.2" transform="rotate(218 32.8 80.5)"/>
+    <ellipse cx="27.7" cy="70.5" rx="8.1" ry="3.1" transform="rotate(237 27.7 70.5)"/>
+    <ellipse cx="26.0" cy="59.4" rx="8.0" ry="3.1" transform="rotate(256 26.0 59.4)"/>
+    <ellipse cx="28.1" cy="48.4" rx="7.8" ry="3.0" transform="rotate(275 28.1 48.4)"/>
+    <ellipse cx="33.6" cy="38.6" rx="7.6" ry="3.0" transform="rotate(294 33.6 38.6)"/>
+    <ellipse cx="42.0" cy="31.2" rx="7.5" ry="2.9" transform="rotate(313 42.0 31.2)"/>
+  </g>
+  <g id="laurel"><use href="#lb"/><use href="#lb" transform="translate(120,0) scale(-1,1)"/></g>
+</defs></svg>
+
+<section class="slide dark">
+  <span class="pagenum">01 / 12</span>
+  <div class="brandmark">
+    <svg width="52" height="52" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="#A9772C"/><use href="#thumb" fill="#ECE8E0" class="thumb-spin"/></svg>
+    <span class="logo">Pol<b>Vers</b></span>
+  </div>
+  <h1>The crowd <span class="accent">decides.</span></h1>
+  <p class="lead">A proving ground for ideas. You post; the people who could actually build it turn their thumb; what survives earns a verdict you can carry anywhere &mdash; and, sometimes, the people to build it.</p>
+</section>
+
+<section class="slide dark2">
+  <span class="pagenum">02 / 12</span>
+  <span class="kicker">The longing</span>
+  <h2>The best idea in the room usually has no way to prove it.</h2>
+  <div class="angles">
+    <div class="angle"><div class="n">01</div><h3>The lost Einsteins</h3><p>How many people with the talent to change something are never seen &mdash; for lack of network, education, or a single lucky break?</p></div>
+    <div class="angle"><div class="n">02</div><h3>No $500k from dad</h3><p>You shouldn't need rich parents to take a shot. You should need to be right &mdash; and a crowd to tell you if you are.</p></div>
+    <div class="angle"><div class="n">03</div><h3>No proof, no seat</h3><p>Founders get waved off from seed rounds for lack of validation. The verdict is the proof that gets you in the room.</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <span class="pagenum">03 / 12</span>
+  <span class="kicker">The insight</span>
+  <div class="stat">43%</div>
+  <p class="lead">of startups die from building something nobody wanted. The reason founders skip validation is dopamine &mdash; building <em>feels</em> productive; asking "does anyone want this?" feels like procrastination. <span class="accent">PolVers makes that question the fun part.</span> Ideas are cheap. Proof is the whole game &mdash; so we sell the proof, not the idea.</p>
+</section>
+
+<section class="slide dark">
+  <span class="pagenum">04 / 12</span>
+  <span class="kicker">Every kind of idea</span>
+  <h2>You've got the <span id="w" class="accent" style="display:inline-block;min-width:3.4em">idea</span>.</h2>
+  <p class="lead">A solar bike part. A co-op that cleans the fjord. A boring, brilliant piece of B2B software. Any kind of idea, from any kind of person &mdash; the same arena, the same honest verdict.</p>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:26px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#CFC6DA"><span>Hardware</span><span>&middot;</span><span>Civic</span><span>&middot;</span><span>SaaS</span><span>&middot;</span><span>Climate</span><span>&middot;</span><span>Social</span><span>&middot;</span><span>Retail</span></div>
+</section>
+
+<section class="slide">
+  <span class="pagenum">05 / 12</span>
+  <span class="kicker">How the arena works</span>
+  <h2>Ideas are cheap. A verdict isn't. That's the trade.</h2>
+  <div class="steps">
+    <div class="step"><div class="num">01</div><h3>Enter the arena</h3><p>Post in a minute &mdash; free. Mark it universal, or local to your city.</p></div>
+    <div class="step"><div class="num">02</div><h3>The crowd turns its thumb</h3><p>Everyone feeds the Roar. Experts weigh in where they're credible &mdash; and earn more entries by rating ideas in their own field.</p></div>
+    <div class="step"><div class="num">03</div><h3>Earn your verdict</h3><p>Real conviction becomes a grade you can screenshot &mdash; plus a timestamp proving you called it first.</p></div>
+  </div>
+</section>
+
+<section class="slide dark">
+  <span class="pagenum">06 / 12</span>
+  <span class="kicker">The heart of it</span>
+  <h2>Two signals. <span class="accent">One idea.</span></h2>
+  <div class="cres">
+    <div class="cpanel">
+      <svg width="72" height="40" viewBox="0 0 72 40" aria-hidden="true">
+        <g fill="#DBAE54"><rect x="0" y="15" width="6" height="10" rx="3"/><rect x="9" y="9" width="6" height="22" rx="3"/><rect x="18" y="3" width="6" height="34" rx="3"/><rect x="27" y="12" width="6" height="16" rx="3"/><rect x="36" y="0" width="6" height="40" rx="3"/><rect x="45" y="10" width="6" height="20" rx="3"/><rect x="54" y="5" width="6" height="30" rx="3"/><rect x="63" y="14" width="6" height="12" rx="3"/></g>
+      </svg>
+      <div class="cl">The Roar</div>
+      <div class="cbig">The whole crowd.</div>
+      <div class="csub">Every thumb counted equally. Democratic, and it scales without limit. This is the crowd literally deciding.</div>
+      <div class="cq">"you know what &mdash; this should get built."</div>
+    </div>
+    <div class="cpanel">
+      <div class="laurelnum" style="width:72px;height:72px;align-self:flex-start"><svg class="lw" viewBox="0 0 120 120" style="color:var(--gold-bright)"><use href="#laurel"/></svg></div>
+      <div class="cl">The Verdict</div>
+      <div class="cbig">The field decides.</div>
+      <div class="csub">The same idea, weighted by proven expertise and track record. Earned &mdash; never bought. Money buys a seat, never a louder voice.</div>
+      <div class="cq">"and the people who could build it agree."</div>
+    </div>
+  </div>
+  <div class="interplay">
+    <div class="chip"><b>Roar &#8593; &middot; Verdict &#8593;</b> &rarr; a hit</div>
+    <div class="chip"><b>Roar &#8593; &middot; Verdict &#8595;</b> &rarr; contested</div>
+    <div class="chip"><b>Roar &#8595; &middot; Verdict &#8593;</b> &rarr; a sleeper</div>
+  </div>
+</section>
+
+<section class="slide">
+  <span class="pagenum">07 / 12</span>
+  <span class="kicker">See it on a real idea</span>
+  <div class="phonewrap">
+    <div class="phone"><div class="screen">
+      <div class="appbar">
+        <span class="lg">Pol<b>Vers</b></span>
+        <span class="entries"><svg width="15" height="15" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18.5" fill="#A9772C"/><use href="#thumb" fill="#ECE8E0"/></svg> 9 entries</span>
+      </div>
+      <div class="icard">
+        <div class="poster">
+          <div class="av">YOU</div>
+          <div><div class="who">Posted by you</div><div class="meta">Oslo &middot; just now &middot; LinkedIn-linked</div></div>
+        </div>
+        <div class="itags"><span>SaaS</span><span>&middot; Universal</span></div>
+        <div class="ititle">PolVers</div>
+        <div class="idesc">An app where you share your ideas and get real hype, proof of concept, or both.</div>
+        <div class="verdictrow">
+          <div class="laurelnum" style="width:96px;height:96px"><svg class="lw" viewBox="0 0 120 120" style="color:var(--gold)"><use href="#laurel"/></svg><span class="tp">TOP</span><span class="pc" style="font-size:24px">3%</span></div>
+          <div class="vl"><b>The Verdict</b>weighted by the field &middot;<br>won its freedom</div>
+        </div>
+        <div class="roar"><span class="rn">12,480</span><span class="rt">The Roar<br><span>91% of the crowd would build it</span></span></div>
+        <div class="isig"><span style="min-width:96px">Builders in field</span><span class="bar"><span class="fl" style="width:64%"></span></span><span class="tag">weights verdict</span></div>
+        <div class="isig"><span style="min-width:96px">"I'd use it" + reason</span><span class="bar"><span class="fl" style="width:84%"></span></span><span class="tag">weights verdict</span></div>
+        <div class="prov">&#9432; Provenance logged &middot; 30 Aug 2026 &middot; certificate available</div>
+      </div>
+      <div class="actions">
+        <div class="abtn"><svg width="20" height="20" viewBox="0 0 24 24" stroke="#655E6B" stroke-width="2.4" stroke-linecap="round"><path d="M6 6 L18 18 M18 6 L6 18"/></svg></div>
+        <div class="abtn big"><svg width="24" height="24" viewBox="0 0 40 40"><use href="#thumb" fill="#A9772C"/></svg></div>
+        <div class="abtn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#655E6B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3l7 7-9 9H5v-7z"/><path d="M12 5l7 7"/></svg></div>
+      </div>
+    </div></div>
+    <div style="max-width:21em">
+      <h2 style="font-size:clamp(24px,3vw,34px)">The concept, applied.</h2>
+      <p class="lead" style="margin-top:16px">The Roar is the crowd; the Verdict is the field. Top 5% earns the laurel. And you earn more entries by rating ideas in <em>your</em> field &mdash; a CMO grading marketing and martech, where the vote actually counts.</p>
+      <p class="caption">Mock &mdash; swap in your own name and photo.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide dark2">
+  <span class="pagenum">08 / 12</span>
+  <span class="kicker">Two doors, one product</span>
+  <h2>Sell the longing to people. Sell the proof to institutions.</h2>
+  <div class="doors">
+    <div class="door" style="background:rgba(255,255,255,.04);border-color:rgba(219,174,84,.3)">
+      <span class="tag" style="color:var(--gold-bright)">Consumer &mdash; the longing</span>
+      <h3 style="color:var(--marble)">"What if you're right?"</h3>
+      <p style="color:#CFC6DA">Free, fun, a little addictive: scroll, back ideas early, watch yours climb. You don't need a rich dad &mdash; you need to be right, and the crowd tells you.</p>
+      <p class="q" style="color:var(--gold-bright)">&rarr; downloads, virality, supply</p>
+    </div>
+    <div class="door b" style="background:var(--gold-bright);border-color:var(--gold-bright)">
+      <span class="tag" style="color:#4A3410">Institutional &mdash; the proof</span>
+      <h3 style="color:#20180A">Validated deal-flow.</h3>
+      <p style="color:#4A3410">Accelerators, VCs, and corporate innovation teams pay for a live feed of proven-demand ideas and the talent raising their hands &mdash; with consent, by name.</p>
+      <p class="q" style="color:#20180A">&rarr; the revenue engine</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <span class="pagenum">09 / 12</span>
+  <span class="kicker">Business model</span>
+  <h2>Free where it's fun. Paid where it's serious.</h2>
+  <div class="model">
+    <div class="tier"><div class="t">Free forever</div><div class="h">Scroll &amp; rate</div><p>The fun stays free &mdash; it's the acquisition engine and the signal source.</p></div>
+    <div class="tier"><div class="t">Light</div><div class="h">$2.99 / mo</div><p>Depth, filters, more entries. Or earn entries by rating in your field.</p></div>
+    <div class="tier rev"><div class="t">The engine</div><div class="h">Scout reports</div><p>Consented, validated deal-flow sold to institutions. Uncapped.</p></div>
+    <div class="tier"><div class="t">Add-on</div><div class="h">Provenance certs</div><p>Hash-verified proof of authorship &amp; date. Ethical, precise.</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <span class="pagenum">10 / 12</span>
+  <span class="kicker">Marketing &mdash; Instagram creative</span>
+  <h2>The share is the ad.</h2>
+  <div class="igrow">
+    <div class="ig ig-dark">
+      <small style="color:var(--gold-bright)">PolVers</small>
+      <h4>How many Einsteins never got a shot?</h4>
+      <div class="foot"><svg width="26" height="26" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18.5" fill="#A9772C"/><use href="#thumb" fill="#ECE8E0"/></svg> The crowd decides.</div>
+      <span class="lab">Angle 01 &mdash; the lost Einsteins</span>
+    </div>
+    <div class="ig ig-marble">
+      <small style="color:var(--gold-deep)">You shouldn't need</small>
+      <h4>a rich dad to get a shot.</h4>
+      <div class="foot" style="color:var(--gold-deep)"><svg width="26" height="26" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18.5" fill="#A9772C"/><use href="#thumb" fill="#ECE8E0"/></svg> Just to be right.</div>
+      <span class="lab">Angle 02 &mdash; the equaliser</span>
+    </div>
+    <div class="ig ig-card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+        <div><small style="color:var(--muted)">Cycling &middot; Universal</small><h4 style="font-size:19px;margin-top:8px;max-width:8em">Solar skin for bikepacking frames</h4></div>
+        <div class="laurelnum" style="width:104px;height:104px"><svg class="lw" viewBox="0 0 120 120" style="color:var(--gold)"><use href="#laurel"/></svg><span class="tp">TOP</span><span class="pc" style="font-size:24px">4%</span></div>
+      </div>
+      <div>
+        <div class="isig"><span style="min-width:70px">The Roar</span><span class="bar"><span class="fl" style="width:88%"></span></span></div>
+        <div class="foot" style="margin-top:12px;font-size:14px"><svg width="22" height="22" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18.5" fill="#A9772C"/><use href="#thumb" fill="#ECE8E0"/></svg> I put my idea in the arena.</div>
+      </div>
+      <span class="lab">Shareable verdict card</span>
+    </div>
+  </div>
+</section>
+
+<section class="slide dark">
+  <span class="pagenum">11 / 12</span>
+  <span class="kicker">The payoff</span>
+  <h2>Ideas that <span class="accent">won their freedom.</span></h2>
+  <p class="lead">A permanent Hall of ideas that got built and succeeded &mdash; credited to the person who posted it, and the backers who called it early. Proof for the skeptics, a carrot for every newcomer, and the reason someone opens the app in month three.</p>
+</section>
+
+<section class="slide">
+  <span class="pagenum">12 / 12</span>
+  <div class="brandmark">
+    <svg width="46" height="46" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="#A9772C"/><use href="#thumb" fill="#ECE8E0" class="thumb-spin"/></svg>
+    <span class="logo">Pol<b>Vers</b></span>
+  </div>
+  <h1>You've got the idea.<br><span class="accent">We've got the verdict.</span></h1>
+  <p class="lead">The next step isn't building &mdash; it's proving anyone wants it. Waitlist first, arena next.</p>
+</section>
+
+<script>
+  var w=document.getElementById('w');
+  if(w){var fonts=[{f:"'Space Grotesk',sans-serif",s:"1em",i:"normal",wt:"500"},{f:"Helvetica,Arial,sans-serif",s:"1em",i:"normal",wt:"700"},{f:"'Caveat',cursive",s:"1.35em",i:"normal",wt:"700"},{f:"'UnifrakturCook',cursive",s:"1.02em",i:"normal",wt:"700"},{f:"'Fredoka',sans-serif",s:"1em",i:"normal",wt:"600"},{f:"'Playfair Display',serif",s:"1.02em",i:"italic",wt:"700"},{f:"'Stardos Stencil',cursive",s:"1em",i:"normal",wt:"700"}];
+  var i=0,reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function ap(n){var d=fonts[n];w.style.fontFamily=d.f;w.style.fontSize=d.s;w.style.fontStyle=d.i;w.style.fontWeight=d.wt;}
+  ap(0);
+  if(!reduce){setInterval(function(){w.style.transition='opacity .25s, transform .25s';w.style.opacity='0';w.style.transform='translateY(-5px) rotateX(70deg)';setTimeout(function(){i=(i+1)%fonts.length;ap(i);w.style.opacity='1';w.style.transform='none';},260);},1300);}}
+  var cue=document.querySelector('.scrollcue');
+  window.addEventListener('scroll',function(){if(cue){cue.style.opacity=window.scrollY>200?'0':'1';}},{passive:true});
+</script>
+</body>
+</html>

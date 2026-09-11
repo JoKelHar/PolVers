@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PolVers — the sensory system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --marble:#ECE8E0; --card:#F5F2EB; --inset:#E1DDD3;
+    --ink:#20182A; --muted:#655E6B;
+    --gold:#A9772C; --gold-deep:#7E561C; --gold-bright:#DBAE54; --plum:#281B3C; --line:#D6CFC1;
+    --display:'Space Grotesk',sans-serif; --body:'IBM Plex Sans',sans-serif; --mono:'IBM Plex Mono',monospace;
+    --spring:cubic-bezier(.34,1.56,.64,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--marble);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased;padding:6vh 6vw}
+  .wrap{max-width:900px;margin:0 auto}
+  .brand{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .logo{font-family:var(--display);font-weight:700;font-size:22px}.logo b{color:var(--gold-deep)}
+  .sub{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:40px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+  .demo{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;display:flex;flex-direction:column;align-items:center;text-align:center;min-height:340px}
+  .demo .tag{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:6px}
+  .demo .desc{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:auto}
+  .stage{display:flex;align-items:center;justify-content:center;flex:1;width:100%;position:relative;margin:14px 0}
+  button.act{font-family:var(--display);font-weight:500;font-size:15px;color:var(--marble);background:var(--gold);border:none;border-radius:30px;padding:12px 24px;cursor:pointer;transition:transform .12s var(--spring),background .18s;display:inline-flex;align-items:center;gap:8px}
+  button.act:hover{background:var(--gold-deep)} button.act:active{transform:scale(.94)}
+  .reset{font-family:var(--mono);font-size:11px;color:var(--muted);background:none;border:none;cursor:pointer;margin-top:10px;letter-spacing:.05em}
+
+  .laurelnum{position:relative;width:150px;height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .laurelnum .lw{position:absolute;inset:0;color:var(--gold);opacity:0;transform:scale(.3);transition:opacity .5s ease,transform .6s var(--spring)}
+  .laurelnum.on .lw{opacity:1;transform:scale(1)}
+  .laurelnum .tp{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--muted);margin-bottom:-2px;opacity:0;transition:opacity .4s ease .2s}
+  .laurelnum .pc{font-family:var(--display);font-weight:700;font-size:34px;color:var(--gold);line-height:1}
+  .laurelnum.on .tp{opacity:1}
+  .ring{position:absolute;width:120px;height:120px;border:2px solid var(--gold-bright);border-radius:50%;opacity:0;pointer-events:none}
+  .ring.go{animation:ring .7s ease-out}
+  @keyframes ring{0%{opacity:.8;transform:scale(.5)}100%{opacity:0;transform:scale(2.1)}}
+  .thumbbtn svg{transition:transform .5s var(--spring)}
+  .thumbbtn.flip svg{transform:rotate(198deg)}
+
+  .roarnum{font-family:var(--display);font-weight:700;font-size:44px;color:var(--gold-deep);line-height:1;letter-spacing:-.02em}
+  .roarlbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+  .wave{display:flex;align-items:flex-end;gap:4px;height:44px;margin:14px 0}
+  .wave span{width:6px;border-radius:3px;background:var(--gold-bright);height:20%;transition:height .3s var(--spring)}
+  .fillbar{width:100%;max-width:180px;height:6px;background:var(--inset);border-radius:20px;overflow:hidden;margin-top:6px}
+  .fillbar i{display:block;height:100%;width:8%;background:var(--gold);border-radius:20px;transition:width .5s var(--spring)}
+
+  .freecard{background:var(--marble);border:1px solid var(--line);border-radius:14px;padding:18px;width:200px;position:relative;transition:transform .6s var(--spring),box-shadow .6s ease}
+  .freecard .ft{font-family:var(--display);font-weight:500;font-size:16px;color:var(--ink)}
+  .freecard .fs{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-top:4px}
+  .freecard.lift{transform:translateY(-14px)}
+  .freelabel{font-family:var(--display);font-style:italic;font-size:15px;color:var(--gold-deep);opacity:0;transform:translateY(8px);transition:opacity .5s ease .25s,transform .5s var(--spring) .25s;margin-top:12px}
+  .freelabel.on{opacity:1;transform:none}
+  .burst{position:absolute;top:50%;left:50%;pointer-events:none}
+  .burst i{position:absolute;width:8px;height:8px;border-radius:2px;background:var(--gold-bright);opacity:0}
+  .burst.go i{animation:burst .8s ease-out forwards}
+  @keyframes burst{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.4)}}
+
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.laurelnum .lw{opacity:1;transform:none}.laurelnum .tp{opacity:1}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">
+    <svg width="30" height="30" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18.5" fill="#A9772C"/><g transform="translate(8 7.5)" fill="#ECE8E0"><path d="M6.4 24 V12.4 L11 3.6 a1.7 1.7 0 0 1 3.2 .8 V9.2 h5.1 a2.2 2.2 0 0 1 2.17 2.63 l-1.3 6.6 A2.2 2.2 0 0 1 18 20.2 H6.4 Z"/><rect x="1.6" y="12.4" width="4.4" height="11.6" rx="1"/></g></svg>
+    <span class="logo">Pol<b>Vers</b></span>
+  </div>
+  <div class="sub">The sensory system &mdash; motion earns its place; every hit has a real event behind it</div>
+
+  <svg width="0" height="0" style="position:absolute"><defs>
+    <g id="lb" fill="currentColor"><ellipse cx="51.2" cy="92.8" rx="8.6" ry="3.3" transform="rotate(180 51.2 92.8)"/><ellipse cx="41.0" cy="88.2" rx="8.4" ry="3.2" transform="rotate(199 41.0 88.2)"/><ellipse cx="32.8" cy="80.5" rx="8.3" ry="3.2" transform="rotate(218 32.8 80.5)"/><ellipse cx="27.7" cy="70.5" rx="8.1" ry="3.1" transform="rotate(237 27.7 70.5)"/><ellipse cx="26.0" cy="59.4" rx="8.0" ry="3.1" transform="rotate(256 26.0 59.4)"/><ellipse cx="28.1" cy="48.4" rx="7.8" ry="3.0" transform="rotate(275 28.1 48.4)"/><ellipse cx="33.6" cy="38.6" rx="7.6" ry="3.0" transform="rotate(294 33.6 38.6)"/><ellipse cx="42.0" cy="31.2" rx="7.5" ry="2.9" transform="rotate(313 42.0 31.2)"/></g>
+    <g id="laurel"><use href="#lb"/><use href="#lb" transform="translate(120,0) scale(-1,1)"/></g>
+    <g id="thumb"><g transform="translate(8 7.5)"><path d="M6.4 24 V12.4 L11 3.6 a1.7 1.7 0 0 1 3.2 .8 V9.2 h5.1 a2.2 2.2 0 0 1 2.17 2.63 l-1.3 6.6 A2.2 2.2 0 0 1 18 20.2 H6.4 Z"/><rect x="1.6" y="12.4" width="4.4" height="11.6" rx="1"/></g></g>
+  </defs></svg>
+
+  <div class="grid">
+
+    <div class="demo">
+      <div class="tag">The verdict strike</div>
+      <div class="desc">The signature moment. The thumb turns, the laurel settles like a stamp pressed into metal, the number resolves. One considered hit &mdash; not confetti.</div>
+      <div class="stage">
+        <div class="ring" id="ring1"></div>
+        <div class="laurelnum" id="laurel1"><svg class="lw" viewBox="0 0 120 120"><use href="#laurel"/></svg><span class="tp">TOP</span><span class="pc" id="pc1">&mdash;</span></div>
+      </div>
+      <button class="act thumbbtn" id="strike"><svg width="20" height="20" viewBox="0 0 40 40"><use href="#thumb" fill="#ECE8E0"/></svg> Cast the verdict</button>
+      <button class="reset" id="reset1">replay</button>
+    </div>
+
+    <div class="demo">
+      <div class="tag">The Roar</div>
+      <div class="desc">Mass, felt. Each thumb rolls the tally up and pulses the wave. The crowd building is the dopamine &mdash; and it's a real count, not a slot machine.</div>
+      <div class="stage" style="flex-direction:column">
+        <div class="roarnum" id="roarnum">8,240</div>
+        <div class="roarlbl">the crowd</div>
+        <div class="wave" id="wave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="fillbar"><i id="fill" style="width:41%"></i></div>
+      </div>
+      <button class="act" id="roar">Add to the Roar</button>
+      <button class="reset" id="reset2">reset</button>
+    </div>
+
+    <div class="demo">
+      <div class="tag">Won its freedom</div>
+      <div class="desc">The peak. An idea graduates: it lifts, the laurels burst outward, the line settles in. Rare, earned, and the most shareable frame in the app.</div>
+      <div class="stage">
+        <div class="burst" id="burst"></div>
+        <div style="display:flex;flex-direction:column;align-items:center">
+          <div class="freecard" id="freecard"><div class="ft">Solar bike skin</div><div class="fs">Top 3% &middot; Cycling</div></div>
+          <div class="freelabel" id="freelabel">won its freedom</div>
+        </div>
+      </div>
+      <button class="act" id="release">Release into the wild</button>
+      <button class="reset" id="reset3">replay</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function countTo(el,from,to,dur,suffix){
+    if(reduce){el.textContent=to+(suffix||"");return;}
+    var start=performance.now();
+    function step(now){var p=Math.min((now-start)/dur,1);var e=1-Math.pow(1-p,3);var v=Math.round(from+(to-from)*e);el.textContent=v.toLocaleString()+(suffix||"");if(p<1)requestAnimationFrame(step);}
+    requestAnimationFrame(step);
+  }
+
+  // 1. Verdict strike
+  var laurel1=document.getElementById("laurel1"),pc1=document.getElementById("pc1"),ring1=document.getElementById("ring1"),strike=document.getElementById("strike");
+  function doStrike(){
+    strike.classList.add("flip");
+    laurel1.classList.add("on");
+    ring1.classList.remove("go");void ring1.offsetWidth;ring1.classList.add("go");
+    pc1.textContent="47%";
+    setTimeout(function(){countTo(pc1,47,3,900,"%");},180);
+    laurel1.animate?laurel1.animate([{transform:'scale(1)'},{transform:'scale(1.12)'},{transform:'scale(1)'}],{duration:600,easing:'cubic-bezier(.34,1.56,.64,1)'}):0;
+  }
+  strike.addEventListener("click",doStrike);
+  document.getElementById("reset1").addEventListener("click",function(){laurel1.classList.remove("on");strike.classList.remove("flip");pc1.textContent="\u2014";});
+
+  // 2. Roar
+  var roarnum=document.getElementById("roarnum"),wave=document.getElementById("wave"),fill=document.getElementById("fill"),roar=document.getElementById("roar");
+  var count=8240,pct=41;
+  function doRoar(){
+    var add=20+Math.floor(Math.random()*50);var from=count;count+=add;countTo(roarnum,from,count,500);
+    pct=Math.min(99,pct+Math.round(add/12));fill.style.width=pct+"%";
+    Array.prototype.forEach.call(wave.children,function(b,i){var h=25+Math.random()*75;b.style.height=h+"%";setTimeout(function(){b.style.height=(15+Math.random()*20)+"%";},260+i*12);});
+    roar.animate?roar.animate([{transform:'scale(1)'},{transform:'scale(.94)'},{transform:'scale(1)'}],{duration:220}):0;
+  }
+  roar.addEventListener("click",doRoar);
+  document.getElementById("reset2").addEventListener("click",function(){count=8240;pct=41;roarnum.textContent="8,240";fill.style.width="41%";Array.prototype.forEach.call(wave.children,function(b){b.style.height="20%";});});
+
+  // 3. Won its freedom
+  var freecard=document.getElementById("freecard"),freelabel=document.getElementById("freelabel"),burst=document.getElementById("burst"),release=document.getElementById("release");
+  function makeBurst(){
+    burst.innerHTML="";
+    for(var i=0;i<14;i++){var s=document.createElement("i");var ang=(i/14)*Math.PI*2;var dist=60+Math.random()*40;s.style.setProperty('--dx',Math.cos(ang)*dist+'px');s.style.setProperty('--dy',Math.sin(ang)*dist+'px');burst.appendChild(s);}
+    burst.classList.remove("go");void burst.offsetWidth;burst.classList.add("go");
+  }
+  function doRelease(){freecard.classList.add("lift");freelabel.classList.add("on");if(!reduce)makeBurst();}
+  release.addEventListener("click",doRelease);
+  document.getElementById("reset3").addEventListener("click",function(){freecard.classList.remove("lift");freelabel.classList.remove("on");burst.innerHTML="";});
+</script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+# Private strategy docs — do not publish
+polvers-dynamics-spec.md
+polvers-launch-kit.md
+CLAUDE.md
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/
